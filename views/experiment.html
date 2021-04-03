@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Self-Learning Tool</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/index">Self-Learning Tool</a>
+          </div>
+        <ul class="navbar-nav">
+          <li class="nav-item active">
+            <a class="nav-link" href="/index">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/experiment">Experiment</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/history">History</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/quiz">Quiz</a>
+          </li>
+         
+        </ul>
+      </nav>
+  
+  <div class="jumbotron">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-8 offset-sm-3">
+                  
+<h2>Experiment Tools</h2>
+<br>
+<h3>Let's try our experiment tool</h3>
+
+<img src="https://miro.medium.com/max/700/1*SsN2DG__Z5DyOI0uf7hbwQ.png" width="300" height="200"/>
+<p>Image Source: <a href="https://miro.medium.com/max/700/1*SsN2DG__Z5DyOI0uf7hbwQ.png">https://miro.medium.com/max/700/1*SsN2DG__Z5DyOI0uf7hbwQ.png</a></p>
+<br>
+<p>Calcuate c:</p>
+<div class="container">
+	
+		<div class="form-group">
+		
+			<div class="col-xs-2">
+                <label>a: </label>
+                <input type="number" id="aInput">
+                <br>
+                <label>b: </label>
+                <input type="number" id="bInput">
+				
+            </div>
+            
+                <br>
+                <button onClick="calculateMath()">Calculate</button>
+         
+        </div>
+        
+        <p id="result"></p>
+	
+	
+</div>
+              
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="text-center">
+    <p>
+        SOFE- 4630 Assignment 2
+    </p>
+
+</div>
+
+<script>
+  //function for calculate the c
+  function calculateMath(){
+      var a = document.getElementById("aInput").value;
+      var b= document.getElementById("bInput").value;
+
+      var c = Math.sqrt(a*a + b*b);
+      document.getElementById("result").innerHTML = "Answer c : " + c;
+  }
+</script>
+</body>
+</html>

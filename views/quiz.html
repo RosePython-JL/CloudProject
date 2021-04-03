@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Self-Learning Tool</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+
+        
+    </script>
+
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/index">Self-Learning Tool</a>
+          </div>
+        <ul class="navbar-nav">
+          <li class="nav-item active">
+            <a class="nav-link" href="/index">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/experiment">Experiment</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/history">History</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/quiz">Quiz</a>
+          </li>
+          
+        </ul>
+      </nav>
+  
+  <div class="jumbotron">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-8 offset-sm-3">
+                <h2>Quiz</h2>
+                        <br>
+                        <p>It is the time to quiz what you learned!</p>
+                        
+
+                            <label>2 + 2 = ?</label>
+                            <input type="text" id="q1" name="q1"><br><br>
+
+                            <label >Use Pythagorean theorem to find c, a = 3 and b = 4 , c = ? : </label>
+                            <input type="text" id="q2" name="q2"><br><br>
+
+                            <label >1 + 1 = ?: </label>
+                            <input type="text" id="q3" name="q3"><br><br>
+
+                            <button onclick="checkQuiz()">Submit</button>
+                          
+                          <br><br>
+
+                          <p id="result"></p>
+                          <br>
+                          <div>
+                            <p id="insertName"></p>
+                            <p id="download"></p>
+                          </div>
+
+                          <br>
+
+                          <div>
+                            <p id="insertEmail"></p>
+                            <p id="sendEmail"></p>
+                          </div>
+                        </div>
+
+                        
+              
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+  var score = 0;
+  var userName = "";
+  // function for checking the quiz and calculate the total socre, return the result
+    function checkQuiz() {
+        var q1ans = document.getElementById("q1").value;
+        var q2ans = document.getElementById("q2").value;
+        var q3ans = document.getElementById("q3").value;
+        var downloadTxt = document.getElementById("download");
+        
+
+        var insertName = document.getElementById("insertName");
+        var insert;
+        var downloadButt;
+        var sendEmail;
+        var resultQ = document.getElementById("result").value;
+        var totCounter = 0;
+
+        //check answers
+        if(q1ans === "4"){
+            totCounter = totCounter + 1;
+        }
+        if(q2ans === "5"){
+            totCounter = totCounter + 1;
+        }
+        if(q3ans === "2"){
+            totCounter = totCounter + 1;
+        }
+        score = totCounter;
+        var result1 = "Score: " + totCounter;
+
+        downloadButt = '<button onclick="downloadTxt()">Download</button>'
+        
+        sendEmail = '<form action="/sendEmail" method="POST">' +' <label name="' + score+ '"></label>' + '<br><label >Please insert your email to get the result: </label><input type="text" name="useremail"><button type="submit">Send Email</button</form>'
+        
+        insert = '<label >Please insert your name for certification: </label><input type="text" id="username">'
+
+        //return score to html
+        document.getElementById("result").innerHTML = result1;
+        //provide input box to html
+        insertName.insertAdjacentHTML('afterbegin', insert);
+        //provide button for downloading certification form
+        downloadTxt.insertAdjacentHTML('afterbegin', downloadButt);
+        
+        //provide button and input box for receiving email
+        document.getElementById("sendEmail").insertAdjacentHTML('afterbegin', sendEmail)
+    }
+    // Allows user inserts his/her name and gernate a certification as txt file. 
+    function downloadTxt(){
+      
+      // Get current location using Geolocation API 
+      if (navigator.geolocation) {
+       navigator.geolocation.getCurrentPosition(
+    	function showPosition(position) {
+
+        var crd = position.coords;
+        var location = (`Latitude : ${crd.latitude}`) + (` Longitude: ${crd.longitude}`);
+
+        userName = document.getElementById("username").value;
+        var text = "Congratulation, " + username.value + "! You got " + score + " in this quiz. Location: " + location;
+        
+        var filename = userName + "_Certification";
+        
+        console.log(text);
+
+        var element = document.createElement('a');
+        //encode the text
+        element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+        //set file name
+        element.setAttribute('download', filename);
+
+        element.style.display = 'none';
+        document.body.appendChild(element);
+
+        element.click();
+
+        document.body.removeChild(element);
+  console.log(location);
+        });
+        } 
+        else { 
+    var location = "Geolocation is not supported by this browser.";
+    userName = document.getElementById("username").value;
+        var text = "Congratulation, " + username.value + "! You got " + score + " in this quiz. Location: " + location;
+        
+        var filename = userName + "_Certification";
+        
+        console.log(text);
+
+        var element = document.createElement('a');
+        //encode the text
+        element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+        //set file name
+        element.setAttribute('download', filename);
+
+        element.style.display = 'none';
+        document.body.appendChild(element);
+
+        element.click();
+
+        document.body.removeChild(element);
+              }
+            }
+
+   
+    
+
+
+
+</script>
+
+<div class="text-center">
+    <p>
+        SOFE- 4630 Assignment 2
+    </p>
+
+</div>
+</body>
+</html>
