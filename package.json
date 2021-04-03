@@ -1,15 +1,21 @@
 {
-  "name": "selfleaning",
-  "version": "0.0.1",
-  "private": true,
+  "name": "youtube-mern-pagination",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
   "scripts": {
-    "start": "node app.js"
+    "start": "nodemon server.js",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
   },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
   "dependencies": {
-    "aws-sdk": "2.x",
-    "body-parser": "^1.19.0",
-    "ejs": "2.x",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
-    "nodemailer": "^6.5.0"
+    "mongoose": "^5.11.14"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
   }
 }
